@@ -1,13 +1,24 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
+import AppNav from '@/components/AppNav.vue'
+import AppFooter from '@/components/AppFooter.vue'
 </script>
 
 <template>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="25" height="25" />
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-  <RouterView />
+  <AppNav />
+  <RouterView v-slot="{ Component }">
+    <template v-if="Component">
+      <KeepAlive>
+        <Suspense>
+          <main class="mx-2">
+            <component :is="Component"></component>
+          </main>
+          <template #fallback>
+            <div class="mx-2">Wczytuję...</div>
+          </template>
+        </Suspense>
+      </KeepAlive>
+    </template>
+  </RouterView>
+  <AppFooter />
 </template>
-

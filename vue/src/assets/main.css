@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  a:hover {
+    @apply text-amber-400 dark:text-blue-100;
+  }
+}
+
+.router-link-active {
+  @apply font-bold;
+}
