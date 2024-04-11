@@ -33,6 +33,14 @@ const { message: hideMessage } = useTrueFalseMessage(item.value.hide)
           <TableData>{{ item.id }}</TableData>
         </tr>
         <tr>
+          <TableData>Firma</TableData>
+          <TableData>{{ item.brand }}</TableData>
+        </tr>
+        <tr>
+          <TableData>Kategoria</TableData>
+          <TableData>{{ item.category }}</TableData>
+        </tr>
+        <tr>
           <TableData>Nazwa</TableData>
           <TableData>{{ item.name }}</TableData>
         </tr>

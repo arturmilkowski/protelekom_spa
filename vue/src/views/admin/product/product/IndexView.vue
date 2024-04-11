@@ -31,6 +31,8 @@ items.value = collection.data
         <TableHeaderRow>
           <TableHeader>LP</TableHeader>
           <TableHeader>ID</TableHeader>
+          <TableHeader>Firma</TableHeader>
+          <TableHeader>Kategoria</TableHeader>
           <TableHeader>Nazwa</TableHeader>
           <TableHeader>Akcja</TableHeader>
         </TableHeaderRow>
@@ -39,6 +41,8 @@ items.value = collection.data
         <tr v-for="(item, index) in items" :key="item.id">
           <TableData>{{ index + 1 }}</TableData>
           <TableData>{{ item.id }}</TableData>
+          <TableData>{{ item.brand }}</TableData>
+          <TableData>{{ item.category }}</TableData>
           <TableData>{{ item.name }}</TableData>
           <TableData>
             <RouterLink :to="{ name: 'admin.product.product.show', params: { id: item.id } }"
