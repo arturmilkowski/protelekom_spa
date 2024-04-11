@@ -13,5 +13,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('admins/products/categories', CategoryController::class);
     Route::apiResource('admins/products/conditions', ConditionController::class);
     Route::apiResource('admins/products/products', ProductController::class);
-    Route::delete('admins/products/products/{product}', DestroyProductImageController::class); //->name('api.products.images.destroy');
+    Route::delete('admins/products/products/images/{product}', DestroyProductImageController::class);
 });

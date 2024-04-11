@@ -16,6 +16,7 @@ const store = useStore()
 const item = ref(null)
 const error = ref(null)
 const apiUrl = 'api/admins/products/products'
+const apiImageUrl = 'api/admins/products/products/images'
 const showModal = ref(false)
 
 const { err, data } = await store.getOne(apiUrl, route.params.id)
@@ -25,16 +26,13 @@ const { message: hideMessage } = useTrueFalseMessage(item.value.hide)
 
 const destroyImage = async (id) => {
   if (confirm('Potwierdź')) {
-    console.log('destroy image', id)
-    /*
     try {
-      await store.destroy('api/products/images', id)
+      await store.destroy(apiImageUrl, id)
     } catch (e) {
       error.value = e
     }
 
     item.value.img = null
-    */
   }
 }
 </script>
