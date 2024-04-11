@@ -14,7 +14,11 @@ class ProductResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        // return parent::toArray($request);
+        $img = null;
+        if ($this->img) {
+            $img = asset(config('settings.store_filepath.product')) . '/' . $this->img;
+        }
+
         return [
             'id' => $this->id,
             'brand_id' => $this->brand_id,
@@ -24,7 +28,7 @@ class ProductResource extends JsonResource
             'slug' => $this->slug,
             'name' => $this->name,
             'description' => $this->description,
-            'img' => $this->img,
+            'img' => $img,
             'site_description' => $this->site_description,
             'site_keyword' => $this->site_keyword,
             'hide' => $this->hide,

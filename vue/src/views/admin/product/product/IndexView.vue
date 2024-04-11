@@ -43,11 +43,15 @@ items.value = collection.data
           <TableData>{{ item.id }}</TableData>
           <TableData>{{ item.brand }}</TableData>
           <TableData>{{ item.category }}</TableData>
-          <TableData>{{ item.name }}</TableData>
           <TableData>
-            <RouterLink :to="{ name: 'admin.product.product.show', params: { id: item.id } }"
-              >Pokaż 🡢</RouterLink
-            >
+            <RouterLink :to="{ name: 'admin.product.product.show', params: { id: item.id } }">
+              {{ item.name }}
+            </RouterLink>
+          </TableData>
+          <TableData>
+            <RouterLink :to="{ name: 'admin.product.product.show', params: { id: item.id } }">
+              Pokaż 🡢
+            </RouterLink>
           </TableData>
         </tr>
       </tbody>

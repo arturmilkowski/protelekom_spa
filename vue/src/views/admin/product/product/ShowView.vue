@@ -8,6 +8,7 @@ import AppAlert from '@/components/AppAlert.vue'
 import BtnGroup from '@/components/BtnGroup.vue'
 import TableTable from '@/components/TableTable.vue'
 import TableData from '@/components/TableData.vue'
+import ImageModal from '@/components/ImageModal.vue'
 
 const route = useRoute()
 const store = useStore()
@@ -15,14 +16,33 @@ const store = useStore()
 const item = ref(null)
 const error = ref(null)
 const apiUrl = 'api/admins/products/products'
+const showModal = ref(false)
 
 const { err, data } = await store.getOne(apiUrl, route.params.id)
 error.value = err
 item.value = data.data
 const { message: hideMessage } = useTrueFalseMessage(item.value.hide)
+
+const destroyImage = async (id) => {
+  if (confirm('Potwierdź')) {
+    console.log('destroy image', id)
+    /*
+    try {
+      await store.destroy('api/products/images', id)
+    } catch (e) {
+      error.value = e
+    }
+
+    item.value.img = null
+    */
+  }
+}
 </script>
 
 <template>
+  <Teleport to="body">
+    <ImageModal :show="showModal" :img="item.img" @close="showModal = false" />
+  </Teleport>
   <HeaderTwo>Produkt</HeaderTwo>
   <AppAlert v-if="error" type="danger">{{ error.message }}</AppAlert>
   <template v-if="item">
@@ -51,6 +71,20 @@ const { message: hideMessage } = useTrueFalseMessage(item.value.hide)
         <tr>
           <TableData>Opis</TableData>
           <TableData>{{ item.description }}</TableData>
+        </tr>
+        <tr>
+          <TableData>Zdjęcie</TableData>
+          <TableData>
+            <template v-if="item.img">
+              <a href="#" id="show-modal" @click="showModal = true">
+                <img :src="item.img" width="200" />
+              </a>
+              <a @click="destroyImage(route.params.id)" href="#usunGrafike" class="btn btn-danger"
+                >Usuń</a
+              >
+            </template>
+            <template v-else>&mdash;</template>
+          </TableData>
         </tr>
         <tr>
           <TableData>Opis strony</TableData>

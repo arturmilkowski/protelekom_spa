@@ -45,8 +45,17 @@ error.value = err
 item.value = data.data
 name.value = item.value.name
 
+const fileChange = async (event) => {
+  item.value.img = event.target.files[0]
+}
+
 const update = async () => {
-  console.log(item.value)
+  // console.log(item.value, 'img:', typeof item.value.img)
+  if (typeof item.value.img == 'string') {
+    // send only images, not file name
+    delete item.value.img
+  }
+
   const { err, validationErr, data } = await store.updatePostForm(
     apiUrl,
     route.params.id,
@@ -129,12 +138,12 @@ const destroy = async () => {
       </InputGroup>
       <InputGroup>
         <InputLabel for="img">Grafika</InputLabel>
-        <!-- <input type="file" @change="fileChange" />
+        <input type="file" @change="fileChange" />
         <template v-if="validationError?.img">
           <template v-for="e in validationError.img" :key="e.img">
             <ValidationError>{{ e }}</ValidationError>
           </template>
-        </template> -->
+        </template>
       </InputGroup>
       <InputGroup>
         <InputLabel for="site_description">Opis strony</InputLabel>

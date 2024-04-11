@@ -47,6 +47,10 @@ const item = reactive({
   // hide: 0
 })
 
+const fileChange = async (event) => {
+  item.img = event.target.files[0]
+}
+
 const create = async () => {
   console.log(item)
 
@@ -116,12 +120,12 @@ const create = async () => {
     </InputGroup>
     <InputGroup>
       <InputLabel for="img">Grafika</InputLabel>
-      <!-- <input type="file" @change="fileChange" />
+      <input type="file" @change="fileChange" />
       <template v-if="validationError?.img">
         <template v-for="e in validationError.img" :key="e.img">
           <ValidationError>{{ e }}</ValidationError>
         </template>
-      </template> -->
+      </template>
     </InputGroup>
     <InputGroup>
       <InputLabel for="site_description">Opis strony</InputLabel>
