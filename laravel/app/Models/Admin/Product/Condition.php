@@ -4,7 +4,7 @@ namespace App\Models\Admin\Product;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-// use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Condition extends Model
 {
@@ -14,4 +14,9 @@ class Condition extends Model
         'slug',
         'name'
     ];
+
+    public function types(): HasMany
+    {
+        return $this->hasMany(Type::class);
+    }
 }

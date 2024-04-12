@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Collection;
 use App\Models\Admin\Product\{Brand, Category, Product};
 
 class ProductTest extends TestCase
@@ -53,5 +54,10 @@ class ProductTest extends TestCase
     public function testProductBelongsToCategory(): void
     {
         $this->assertInstanceOf(Category::class, $this->product->category);
+    }
+
+    public function testProductHasManyTypes(): void
+    {
+        $this->assertInstanceOf(Collection::class, $this->product->types);
     }
 }

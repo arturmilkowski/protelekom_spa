@@ -11,14 +11,14 @@ class CategoryTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testMakeBrand(): void
+    public function testMakeCategory(): void
     {
         $category = Category::factory()->make();
 
         $this->assertInstanceOf(Category::class, $category);
     }
 
-    public function testMakeCreate(): void
+    public function testCreateCategory(): void
     {
         $category = Category::factory()->create();
 

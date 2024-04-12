@@ -18,7 +18,7 @@ class BrandTest extends TestCase
         $this->assertInstanceOf(Brand::class, $brand);
     }
 
-    public function testMakeCreate(): void
+    public function testCreateBrand(): void
     {
         $brand = Brand::factory()->create();
 
