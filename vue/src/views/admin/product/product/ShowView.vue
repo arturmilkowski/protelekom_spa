@@ -2,13 +2,13 @@
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from '@/stores/store'
-import { useTrueFalseMessage } from '@/composables/useTrueFalseMessage'
 import HeaderTwo from '@/components/HeaderTwo.vue'
 import AppAlert from '@/components/AppAlert.vue'
 import BtnGroup from '@/components/BtnGroup.vue'
 import TableTable from '@/components/TableTable.vue'
 import TableData from '@/components/TableData.vue'
 import ImageModal from '@/components/ImageModal.vue'
+import MyBadge from '@/components/MyBadge.vue'
 
 const route = useRoute()
 const store = useStore()
@@ -22,7 +22,6 @@ const showModal = ref(false)
 const { err, data } = await store.getOne(apiUrl, route.params.id)
 error.value = err
 item.value = data.data
-const { message: hideMessage } = useTrueFalseMessage(item.value.hide)
 
 const destroyImage = async (id) => {
   if (confirm('Potwierdź')) {
@@ -94,7 +93,10 @@ const destroyImage = async (id) => {
         </tr>
         <tr>
           <TableData>Ukryj produkt</TableData>
-          <TableData>{{ item.hide }} | {{ hideMessage }}</TableData>
+          <TableData>
+            {{ item.hide }}
+            <MyBadge :yes-no="item.hide"></MyBadge>
+          </TableData>
         </tr>
         <tr>
           <TableData>Utworzono</TableData>

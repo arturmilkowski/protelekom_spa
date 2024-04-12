@@ -21,7 +21,7 @@ const store = useStore()
 const item = ref(null)
 let brands = ref([])
 let categories = ref([])
-const name = ref('')
+// const name = ref('')
 const error = ref(null)
 const validationError = ref(null)
 const apiUrl = 'api/admins/products/products'
@@ -43,14 +43,14 @@ if (categoryCollection.data) {
 const { err, data } = await store.getOne(apiUrl, route.params.id)
 error.value = err
 item.value = data.data
-name.value = item.value.name
+// name.value = item.value.name
+item.value.hide = Boolean(item.value.hide)
 
 const fileChange = async (event) => {
   item.value.img = event.target.files[0]
 }
 
 const update = async () => {
-  // console.log(item.value, 'img:', typeof item.value.img)
   if (typeof item.value.img == 'string') {
     // send only images, not file name
     delete item.value.img

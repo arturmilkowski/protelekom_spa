@@ -7,6 +7,7 @@ import TableTable from '@/components/TableTable.vue'
 import TableHeaderRow from '@/components/TableHeaderRow.vue'
 import TableHeader from '@/components/TableHeader.vue'
 import TableData from '@/components/TableData.vue'
+import MyBadge from '@/components/MyBadge.vue'
 
 const store = useStore()
 
@@ -34,6 +35,7 @@ items.value = collection.data
           <TableHeader>Firma</TableHeader>
           <TableHeader>Kategoria</TableHeader>
           <TableHeader>Nazwa</TableHeader>
+          <TableHeader>Ukryty</TableHeader>
           <TableHeader>Akcja</TableHeader>
         </TableHeaderRow>
       </thead>
@@ -48,6 +50,7 @@ items.value = collection.data
               {{ item.name }}
             </RouterLink>
           </TableData>
+          <TableData> {{ item.hide }} <MyBadge :yes-no="item.hide" /> </TableData>
           <TableData>
             <RouterLink :to="{ name: 'admin.product.product.show', params: { id: item.id } }">
               Pokaż 🡢
