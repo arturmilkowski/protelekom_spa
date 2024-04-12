@@ -8,7 +8,7 @@ import BtnGroup from '@/components/BtnGroup.vue'
 import TableTable from '@/components/TableTable.vue'
 import TableData from '@/components/TableData.vue'
 import ImageModal from '@/components/ImageModal.vue'
-import MyBadge from '@/components/MyBadge.vue'
+import YesNoBadge from '@/components/YesNoBadge.vue'
 
 const route = useRoute()
 const store = useStore()
@@ -93,10 +93,7 @@ const destroyImage = async (id) => {
         </tr>
         <tr>
           <TableData>Ukryj produkt</TableData>
-          <TableData>
-            {{ item.hide }}
-            <MyBadge :yes-no="item.hide"></MyBadge>
-          </TableData>
+          <TableData><YesNoBadge :yes-no="item.hide" /></TableData>
         </tr>
         <tr>
           <TableData>Utworzono</TableData>

@@ -21,7 +21,6 @@ const store = useStore()
 const item = ref(null)
 let brands = ref([])
 let categories = ref([])
-// const name = ref('')
 const error = ref(null)
 const validationError = ref(null)
 const apiUrl = 'api/admins/products/products'
@@ -43,7 +42,6 @@ if (categoryCollection.data) {
 const { err, data } = await store.getOne(apiUrl, route.params.id)
 error.value = err
 item.value = data.data
-// name.value = item.value.name
 item.value.hide = Boolean(item.value.hide)
 
 const fileChange = async (event) => {
