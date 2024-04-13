@@ -110,6 +110,7 @@ const destroyImage = async (id) => {
       <RouterLink :to="{ name: 'admin.product.product.edit', params: { id: item.id } }"
         >Edytuj</RouterLink
       >
+      <RouterLink :to="{ name: 'admin.product.type.index' }">Pokaż warianty produktu</RouterLink>
     </BtnGroup>
   </template>
   <AppAlert v-else>Brak danych</AppAlert>
