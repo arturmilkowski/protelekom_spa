@@ -11,6 +11,8 @@ use App\Http\Controllers\Api\Admin\Product\{
     TypeController,
     DestroyTypeImageController
 };
+use App\Http\Controllers\Api\Admin\Slug\SlugController;
+
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
@@ -24,4 +26,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('admins/products/products/images/{product}', DestroyProductImageController::class);
     Route::apiResource('admins/products/{product}/types', TypeController::class);
     Route::delete('admins/products/{product}/types/images/{type}', DestroyTypeImageController::class);
+
+    Route::post('slugs', SlugController::class)->name('api.slugs');
 });
