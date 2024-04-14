@@ -23,5 +23,5 @@ const badgeText = computed(() => {
 </script>
 
 <template>
-  <span :class="badgeClass" class="text-gray-50 px-2 py-0.5 rounded">{{ badgeText }}</span>
+  <span :class="badgeClass" class="text-sm text-gray-50 px-2 py-0.5 rounded">{{ badgeText }}</span>
 </template>

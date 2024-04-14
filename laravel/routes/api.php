@@ -27,5 +27,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('admins/products/{product}/types', TypeController::class);
     Route::delete('admins/products/{product}/types/images/{type}', DestroyTypeImageController::class);
 
-    Route::post('slugs', SlugController::class)->name('api.slugs');
+    Route::post('admins/slugs', SlugController::class)->name('api.slugs');
 });

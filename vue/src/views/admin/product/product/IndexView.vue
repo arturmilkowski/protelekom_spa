@@ -7,7 +7,7 @@ import TableTable from '@/components/TableTable.vue'
 import TableHeaderRow from '@/components/TableHeaderRow.vue'
 import TableHeader from '@/components/TableHeader.vue'
 import TableData from '@/components/TableData.vue'
-import YesNoBadge from '@/components/YesNoBadge.vue'
+import BadgeYesNo from '@/components/BadgeYesNo.vue'
 
 const store = useStore()
 
@@ -50,7 +50,7 @@ items.value = collection.data
               {{ item.name }}
             </RouterLink>
           </TableData>
-          <TableData><YesNoBadge :yes-no="item.hide" /></TableData>
+          <TableData><BadgeYesNo :yes-no="item.hide" /></TableData>
           <TableData>
             <RouterLink :to="{ name: 'admin.product.product.show', params: { id: item.id } }">
               Pokaż 🡢

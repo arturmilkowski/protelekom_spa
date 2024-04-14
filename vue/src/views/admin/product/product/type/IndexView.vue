@@ -9,7 +9,8 @@ import TableTable from '@/components/TableTable.vue'
 import TableHeaderRow from '@/components/TableHeaderRow.vue'
 import TableHeader from '@/components/TableHeader.vue'
 import TableData from '@/components/TableData.vue'
-import YesNoBadge from '@/components/YesNoBadge.vue'
+import BadgeYesNo from '@/components/BadgeYesNo.vue'
+import BadgeCondition from '@/components/BadgeCondition.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -61,9 +62,11 @@ if (error.value?.message == 'Request failed with status code 401') {
           <TableData>{{ item.name }}</TableData>
           <TableData>{{ item.price }}</TableData>
           <TableData>{{ item.promo_price }}</TableData>
-          <TableData>{{ item.condition }}</TableData>
+          <TableData>
+            <BadgeCondition :new-used="item.condition_id">{{ item.condition }}</BadgeCondition>
+          </TableData>
           <TableData>{{ item.quantity }}</TableData>
-          <TableData><YesNoBadge :yes-no="item.hide" /></TableData>
+          <TableData><BadgeYesNo :yes-no="item.hide" /></TableData>
           <TableData>
             <RouterLink
               :to="{
