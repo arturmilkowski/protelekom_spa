@@ -15,11 +15,23 @@ const store = useStore()
 const item = ref(null)
 const error = ref(null)
 const apiUrl = `api/admins/products/${route.params.product_id}/types`
-// console.log(apiUrl)
+const apiUrlImage = `api/admins/products/${route.params.product_id}/types/images`
 
 const { err, data } = await store.getOne(apiUrl, route.params.id)
 error.value = err
 item.value = data.data
+
+const destroyImage = async (id) => {
+  if (confirm('Potwierdź')) {
+    try {
+      await store.destroy(apiUrlImage, id)
+    } catch (e) {
+      error.value = e
+    }
+
+    item.value.img = null
+  }
+}
 </script>
 
 <template>
@@ -31,10 +43,6 @@ item.value = data.data
         <tr>
           <TableData>ID</TableData>
           <TableData>{{ item.id }}</TableData>
-        </tr>
-        <tr>
-          <TableData>-</TableData>
-          <TableData>{{ item }}</TableData>
         </tr>
         <tr>
           <TableData>ID produktu</TableData>
@@ -79,14 +87,13 @@ item.value = data.data
               <!-- <a href="#" id="show-modal" @click="showModal = true"> -->
               <img :src="item.img" width="200" />
               <!-- </a> -->
-              <!-- <a @click="destroyImage(route.params.id)" href="#usunGrafike" class="btn btn-danger"
+              <a @click="destroyImage(route.params.id)" href="#usunGrafike" class="btn btn-danger"
                 >Usuń</a
-              > -->
+              >
             </template>
             <template v-else>&mdash;</template>
           </TableData>
         </tr>
-
         <tr>
           <TableData>Utworzono</TableData>
           <TableData>{{ item.created_at }}</TableData>
@@ -100,5 +107,12 @@ item.value = data.data
   </template>
   <BtnGroup>
     <RouterLink :to="{ name: 'admin.product.type.index', params: { id: 1 } }">🡠 Powrót</RouterLink>
+    <RouterLink
+      :to="{
+        name: 'admin.product.type.edit',
+        params: { product_id: item.product_id, id: item.id }
+      }"
+      >Edytuj</RouterLink
+    >
   </BtnGroup>
 </template>

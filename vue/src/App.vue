@@ -2,6 +2,7 @@
 import { RouterView } from 'vue-router'
 import AppNav from '@/components/AppNav.vue'
 import AppFooter from '@/components/AppFooter.vue'
+import MySpinner from '@/components/MySpinner.vue'
 </script>
 
 <template>
@@ -14,7 +15,9 @@ import AppFooter from '@/components/AppFooter.vue'
             <component :is="Component"></component>
           </main>
           <template #fallback>
-            <div class="mx-2">Wczytuję...</div>
+            <div class="mx-2">
+              <MySpinner />
+            </div>
           </template>
         </Suspense>
       </KeepAlive>
