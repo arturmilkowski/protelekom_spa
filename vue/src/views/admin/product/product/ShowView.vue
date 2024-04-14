@@ -15,9 +15,9 @@ const store = useStore()
 
 const item = ref(null)
 const error = ref(null)
+const showModal = ref(false)
 const apiUrl = 'api/admins/products/products'
 const apiImageUrl = 'api/admins/products/products/images'
-const showModal = ref(false)
 
 const { err, data } = await store.getOne(apiUrl, route.params.id)
 error.value = err

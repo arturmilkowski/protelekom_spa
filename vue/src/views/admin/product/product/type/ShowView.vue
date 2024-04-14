@@ -7,6 +7,7 @@ import AppAlert from '@/components/AppAlert.vue'
 import BtnGroup from '@/components/BtnGroup.vue'
 import TableTable from '@/components/TableTable.vue'
 import TableData from '@/components/TableData.vue'
+import ImageModal from '@/components/ImageModal.vue'
 import YesNoBadge from '@/components/YesNoBadge.vue'
 
 const route = useRoute()
@@ -14,6 +15,7 @@ const store = useStore()
 
 const item = ref(null)
 const error = ref(null)
+const showModal = ref(false)
 const apiUrl = `api/admins/products/${route.params.product_id}/types`
 const apiUrlImage = `api/admins/products/${route.params.product_id}/types/images`
 
@@ -35,6 +37,9 @@ const destroyImage = async (id) => {
 </script>
 
 <template>
+  <Teleport to="body">
+    <ImageModal :show="showModal" :img="item.img" @close="showModal = false" />
+  </Teleport>
   <HeaderTwo>Wariant produktu</HeaderTwo>
   <AppAlert v-if="error" type="danger">{{ error.message }}</AppAlert>
   <template v-if="item">
@@ -84,9 +89,9 @@ const destroyImage = async (id) => {
           <TableData>Zdjęcie</TableData>
           <TableData>
             <template v-if="item.img">
-              <!-- <a href="#" id="show-modal" @click="showModal = true"> -->
-              <img :src="item.img" width="200" />
-              <!-- </a> -->
+              <a href="#" id="show-modal" @click="showModal = true">
+                <img :src="item.img" width="200" />
+              </a>
               <a @click="destroyImage(route.params.id)" href="#usunGrafike" class="btn btn-danger"
                 >Usuń</a
               >

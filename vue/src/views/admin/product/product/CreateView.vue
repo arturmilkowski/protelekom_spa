@@ -52,8 +52,6 @@ const fileChange = async (event) => {
 }
 
 const create = async () => {
-  console.log(item)
-
   const { err, validationErr, data } = await store.createPostForm(apiUrl, item)
   error.value = err
   validationError.value = validationErr

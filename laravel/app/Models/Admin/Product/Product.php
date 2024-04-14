@@ -34,6 +34,6 @@ class Product extends Model
 
     public function types(): HasMany
     {
-        return $this->hasMany(Type::class);
+        return $this->hasMany(Type::class)->orderBy('created_at', 'desc');
     }
 }

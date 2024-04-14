@@ -56,6 +56,17 @@ const update = async () => {
     })
   }
 }
+
+const destroy = async () => {
+  if (confirm('Potwierdź')) {
+    const { err, data } = await store.destroy(apiUrl, route.params.id)
+    error.value = err
+
+    if (data?.status == 204) {
+      router.push({ name: 'admin.product.type.index', params: { id: route.params.product_id } })
+    }
+  }
+}
 </script>
 
 <template>
@@ -95,7 +106,6 @@ const update = async () => {
           type="number"
           v-model="item.promo_price"
           id="promo_price"
-          min="1"
           max="99999"
           step="1"
           placeholder="Pole nieobowiązkowe"
@@ -176,7 +186,7 @@ const update = async () => {
         }"
         >Powrót</RouterLink
       >
-      <!-- <a @click="destroy()" href="#delete">Usuń</a> -->
+      <a @click="destroy()" href="#delete">Usuń</a>
     </BtnGroup>
   </template>
   <AppAlert v-else>Brak danych</AppAlert>

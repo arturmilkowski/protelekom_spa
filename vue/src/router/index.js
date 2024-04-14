@@ -123,6 +123,12 @@ const router = createRouter({
       meta: { auth: true }
     },
     {
+      path: '/admin/products/:id/types/create',
+      name: 'admin.product.type.create',
+      component: () => import('../views/admin/product/product/type/CreateView.vue'),
+      meta: { auth: true }
+    },
+    {
       path: '/admin/products/:product_id/types/show/:id',
       name: 'admin.product.type.show',
       component: () => import('../views/admin/product/product/type/ShowView.vue'),

@@ -31,6 +31,11 @@ if (error.value?.message == 'Request failed with status code 401') {
   <HeaderTwo>Typy produktu</HeaderTwo>
   <AppAlert v-if="error" type="danger">{{ error.message }}</AppAlert>
   <template v-else>
+    <p class="my-6">
+      <RouterLink :to="{ name: 'admin.product.type.create', params: { id: route.params.id } }"
+        >Dodaj</RouterLink
+      >
+    </p>
     <TableTable v-if="items.length">
       <thead>
         <TableHeaderRow>
