@@ -9,6 +9,8 @@ import TableTable from '@/components/TableTable.vue'
 import TableData from '@/components/TableData.vue'
 import ImageModal from '@/components/ImageModal.vue'
 import BadgeYesNo from '@/components/BadgeYesNo.vue'
+import { PencilIcon } from '@heroicons/vue/24/outline'
+import { RectangleStackIcon } from '@heroicons/vue/24/outline'
 
 const route = useRoute()
 const store = useStore()
@@ -108,9 +110,15 @@ const destroyImage = async (id) => {
     <BtnGroup>
       <RouterLink :to="{ name: 'admin.product.product.index' }">🡠 Powrót</RouterLink>
       <RouterLink :to="{ name: 'admin.product.product.edit', params: { id: item.id } }"
-        >Edytuj</RouterLink
+        ><PencilIcon
+          class="inline-flex mr-0.5 h-4 w-4 sm:h-4 sm:w-4 md:h-4 md:w-4 lg:h-4 lg:w-4 xl:h-5 xl:w-5 2xl:h-5 2xl:w-5"
+        />Edytuj</RouterLink
       >
-      <RouterLink :to="{ name: 'admin.product.type.index' }">Pokaż warianty produktu</RouterLink>
+      <RouterLink :to="{ name: 'admin.product.type.index' }"
+        ><RectangleStackIcon
+          class="inline-flex mr-0.5 h-4 w-4 sm:h-4 sm:w-4 md:h-4 md:w-4 lg:h-4 lg:w-4 xl:h-5 xl:w-5 2xl:h-5 2xl:w-5"
+        />Pokaż warianty produktu</RouterLink
+      >
     </BtnGroup>
   </template>
   <AppAlert v-else>Brak danych</AppAlert>
