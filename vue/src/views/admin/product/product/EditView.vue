@@ -64,7 +64,7 @@ const update = async () => {
   validationError.value = validationErr
 
   if (data?.status == 200) {
-    router.push({ name: 'admin.product.product.index' })
+    router.push({ name: 'admin.product.index' })
   }
 }
 
@@ -74,7 +74,7 @@ const destroy = async () => {
     error.value = err
 
     if (data?.status == 204) {
-      router.push({ name: 'admin.product.product.index' })
+      router.push({ name: 'admin.product.index' })
     }
   }
 }
@@ -181,7 +181,7 @@ const destroy = async () => {
       <InputButton>Edytuj</InputButton>
     </form>
     <BtnGroup>
-      <RouterLink :to="{ name: 'admin.product.product.show', params: { id: item.id } }"
+      <RouterLink :to="{ name: 'admin.product.show', params: { id: item.id } }"
         >🡠 Powrót</RouterLink
       >
       <a @click="destroy()" href="#delete" class="text-red-600"

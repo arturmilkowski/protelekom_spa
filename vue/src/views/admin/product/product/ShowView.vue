@@ -108,8 +108,8 @@ const destroyImage = async (id) => {
       </tbody>
     </TableTable>
     <BtnGroup>
-      <RouterLink :to="{ name: 'admin.product.product.index' }">🡠 Powrót</RouterLink>
-      <RouterLink :to="{ name: 'admin.product.product.edit', params: { id: item.id } }"
+      <RouterLink :to="{ name: 'admin.product.index' }">🡠 Powrót</RouterLink>
+      <RouterLink :to="{ name: 'admin.product.edit', params: { id: item.id } }"
         ><PencilIcon
           class="inline-flex mr-0.5 h-4 w-4 sm:h-4 sm:w-4 md:h-4 md:w-4 lg:h-4 lg:w-4 xl:h-5 xl:w-5 2xl:h-5 2xl:w-5"
         />Edytuj</RouterLink

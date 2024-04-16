@@ -83,7 +83,7 @@ if (error.value?.message == 'Request failed with status code 401') {
     <AppAlert v-else>Brak danych</AppAlert>
   </template>
   <BtnGroup>
-    <RouterLink :to="{ name: 'admin.product.product.show', params: { id: route.params.id } }">
+    <RouterLink :to="{ name: 'admin.product.show', params: { id: route.params.id } }">
       🡠 Powrót
     </RouterLink>
   </BtnGroup>

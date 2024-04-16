@@ -93,26 +93,32 @@ const router = createRouter({
       meta: { auth: true }
     },
     {
-      path: '/admin/products/products',
-      name: 'admin.product.product.index',
+      path: '/admin/products/index',
+      name: 'admin.product.home',
+      component: () => import('../views/admin/product/IndexView.vue'),
+      meta: { auth: true }
+    },
+    {
+      path: '/admin/products',
+      name: 'admin.product.index',
       component: () => import('../views/admin/product/product/IndexView.vue'),
       meta: { auth: true }
     },
     {
-      path: '/admin/products/products/create',
-      name: 'admin.product.product.create',
+      path: '/admin/products/create',
+      name: 'admin.product.create',
       component: () => import('../views/admin/product/product/CreateView.vue'),
       meta: { auth: true }
     },
     {
-      path: '/admin/products/products/show/:id',
-      name: 'admin.product.product.show',
+      path: '/admin/products/show/:id',
+      name: 'admin.product.show',
       component: () => import('../views/admin/product/product/ShowView.vue'),
       meta: { auth: true }
     },
     {
-      path: '/admin/products/products/:id/edit',
-      name: 'admin.product.product.edit',
+      path: '/admin/products/:id/edit',
+      name: 'admin.product.edit',
       component: () => import('../views/admin/product/product/EditView.vue'),
       meta: { auth: true }
     },

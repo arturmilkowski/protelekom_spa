@@ -57,7 +57,7 @@ const create = async () => {
   validationError.value = validationErr
 
   if (data?.status == 201) {
-    router.push({ name: 'admin.product.product.index' })
+    router.push({ name: 'admin.product.index' })
   }
 }
 </script>
@@ -158,6 +158,6 @@ const create = async () => {
     <InputButton>Dodaj</InputButton>
   </form>
   <p class="mt-6">
-    <RouterLink :to="{ name: 'admin.product.product.index' }">Powrót</RouterLink>
+    <RouterLink :to="{ name: 'admin.product.index' }">Powrót</RouterLink>
   </p>
 </template>

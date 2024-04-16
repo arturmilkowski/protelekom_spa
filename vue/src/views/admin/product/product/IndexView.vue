@@ -25,7 +25,7 @@ items.value = collection.data
   <AppAlert v-if="error" type="danger">{{ error.message }}</AppAlert>
   <template v-else>
     <p class="my-6">
-      <RouterLink :to="{ name: 'admin.product.product.create' }">Dodaj</RouterLink>
+      <RouterLink :to="{ name: 'admin.product.create' }">Dodaj</RouterLink>
     </p>
     <TableTable v-if="items.length">
       <thead>
@@ -46,13 +46,13 @@ items.value = collection.data
           <TableData>{{ item.brand }}</TableData>
           <TableData>{{ item.category }}</TableData>
           <TableData>
-            <RouterLink :to="{ name: 'admin.product.product.show', params: { id: item.id } }">
+            <RouterLink :to="{ name: 'admin.product.show', params: { id: item.id } }">
               {{ item.name }}
             </RouterLink>
           </TableData>
           <TableData><BadgeYesNo :yes-no="item.hide" /></TableData>
           <TableData>
-            <RouterLink :to="{ name: 'admin.product.product.show', params: { id: item.id } }">
+            <RouterLink :to="{ name: 'admin.product.show', params: { id: item.id } }">
               Pokaż 🡢
             </RouterLink>
           </TableData>

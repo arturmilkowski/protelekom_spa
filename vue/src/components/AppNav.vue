@@ -15,7 +15,7 @@ const store = useAuthStore()
       <RouterLink :to="{ name: 'admin.product.brand.index' }">Firmy</RouterLink>
       <RouterLink :to="{ name: 'admin.product.category.index' }">Kategorie</RouterLink>
       <RouterLink :to="{ name: 'admin.product.condition.index' }">Stan</RouterLink>
-      <RouterLink :to="{ name: 'admin.product.product.index' }">Produkty</RouterLink>
+      <RouterLink :to="{ name: 'admin.product.home' }">Produkty</RouterLink>
     </template>
     <RouterLink :to="{ name: 'page.about' }">O firmie</RouterLink>
     <RouterLink :to="{ name: 'login' }" v-if="store.isGuest">Zaloguj</RouterLink>
