@@ -69,7 +69,7 @@ const destroyImage = async (id) => {
         </tr>
         <tr>
           <TableData>Opis</TableData>
-          <TableData>{{ item.description }}</TableData>
+          <TableData><div v-html="item.description"></div></TableData>
         </tr>
         <tr>
           <TableData>Zdjęcie</TableData>

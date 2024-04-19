@@ -14,6 +14,7 @@ import InputCheckbox from '@/components/InputCheckbox.vue'
 import InputButton from '@/components/InputButton.vue'
 import ValidationError from '@/components/ValidationError.vue'
 import { TrashIcon } from '@heroicons/vue/24/outline'
+import TipTap from '@/components/TipTap.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -124,6 +125,15 @@ const destroy = async () => {
       </InputGroup>
       <InputGroup>
         <InputLabel for="description">Opis</InputLabel>
+        <TipTap v-model="item.description" id="description" placeholder="Pole nieobowiązkowe" />
+        <template v-if="validationError?.description">
+          <template v-for="e in validationError.description" :key="e.description">
+            <ValidationError>{{ e }}</ValidationError>
+          </template>
+        </template>
+      </InputGroup>
+      <!-- <InputGroup>
+        <InputLabel for="description">Opis</InputLabel>
         <InputTextarea
           v-model="item.description"
           id="description"
@@ -134,7 +144,7 @@ const destroy = async () => {
             <ValidationError>{{ e }}</ValidationError>
           </template>
         </template>
-      </InputGroup>
+      </InputGroup> -->
       <InputGroup>
         <InputLabel for="img">Grafika</InputLabel>
         <input type="file" @change="fileChange" />

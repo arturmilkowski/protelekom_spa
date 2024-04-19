@@ -12,6 +12,7 @@ import InputSelect from '@/components/InputSelect.vue'
 import InputTextarea from '@/components/InputTextarea.vue'
 import InputCheckbox from '@/components/InputCheckbox.vue'
 import ValidationError from '@/components/ValidationError.vue'
+import TipTap from '@/components/TipTap.vue'
 
 const router = useRouter()
 const store = useStore()
@@ -40,7 +41,7 @@ const item = reactive({
   brand_id: 1,
   category_id: 1,
   name: '',
-  description: '',
+  description: 'Opis',
   img: null,
   site_description: '',
   site_keyword: ''
@@ -105,6 +106,15 @@ const create = async () => {
     </InputGroup>
     <InputGroup>
       <InputLabel for="description">Opis</InputLabel>
+      <TipTap v-model="item.description" />
+      <template v-if="validationError?.description">
+        <template v-for="e in validationError.description" :key="e.description">
+          <ValidationError>{{ e }}</ValidationError>
+        </template>
+      </template>
+    </InputGroup>
+    <!-- <InputGroup>
+      <InputLabel for="description">Opis</InputLabel>
       <InputTextarea
         v-model="item.description"
         id="description"
@@ -115,7 +125,7 @@ const create = async () => {
           <ValidationError>{{ e }}</ValidationError>
         </template>
       </template>
-    </InputGroup>
+    </InputGroup> -->
     <InputGroup>
       <InputLabel for="img">Grafika</InputLabel>
       <input type="file" @change="fileChange" />
