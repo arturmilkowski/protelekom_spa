@@ -12,11 +12,14 @@ use App\Http\Controllers\Api\Admin\Product\{
     DestroyTypeImageController
 };
 use App\Http\Controllers\Api\Admin\Slug\SlugController;
-
+use App\Http\Controllers\Api\Page\{IndexController, AboutController};
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/', IndexController::class)->name('pages.index');
+Route::get('about', AboutController::class)->name('pages.about');
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('admins/products/brands', BrandController::class);
@@ -27,5 +30,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('admins/products/{product}/types', TypeController::class);
     Route::delete('admins/products/{product}/types/images/{type}', DestroyTypeImageController::class);
 
-    Route::post('admins/slugs', SlugController::class)->name('api.slugs');
+    Route::post('admins/slugs', SlugController::class)->name('api/slugs');
 });
