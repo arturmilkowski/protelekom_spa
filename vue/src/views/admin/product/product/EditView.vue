@@ -13,7 +13,6 @@ import InputSelect from '@/components/InputSelect.vue'
 import InputCheckbox from '@/components/InputCheckbox.vue'
 import InputButton from '@/components/InputButton.vue'
 import ValidationError from '@/components/ValidationError.vue'
-import { TrashIcon } from '@heroicons/vue/24/outline'
 import TipTap from '@/components/TipTap.vue'
 import { RiDeleteBinLine } from '@remixicon/vue'
 
@@ -194,11 +193,6 @@ const destroy = async () => {
     <BtnGroup>
       <RouterLink :to="{ name: 'admin.product.show', params: { id: item.id } }"
         >🡠 Powrót</RouterLink
-      >
-      <a @click="destroy()" href="#delete" class="text-red-600"
-        ><TrashIcon
-          class="inline mr-0.5 h-4 w-4 sm:h-4 sm:w-4 md:h-4 md:w-4 lg:h-4 lg:w-4 xl:h-5 xl:w-5 2xl:h-5 2xl:w-5"
-        />Usuń</a
       >
       <a @click="destroy()" href="#delete" class="text-red-600"
         ><RiDeleteBinLine
