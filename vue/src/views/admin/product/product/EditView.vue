@@ -9,12 +9,13 @@ import InputLabel from '@/components/InputLabel.vue'
 import InputGroup from '@/components/InputGroup.vue'
 import InputField from '@/components/InputField.vue'
 import InputSelect from '@/components/InputSelect.vue'
-import InputTextarea from '@/components/InputTextarea.vue'
+// import InputTextarea from '@/components/InputTextarea.vue'
 import InputCheckbox from '@/components/InputCheckbox.vue'
 import InputButton from '@/components/InputButton.vue'
 import ValidationError from '@/components/ValidationError.vue'
 import { TrashIcon } from '@heroicons/vue/24/outline'
 import TipTap from '@/components/TipTap.vue'
+import { RiDeleteBinLine } from '@remixicon/vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -199,6 +200,15 @@ const destroy = async () => {
           class="inline mr-0.5 h-4 w-4 sm:h-4 sm:w-4 md:h-4 md:w-4 lg:h-4 lg:w-4 xl:h-5 xl:w-5 2xl:h-5 2xl:w-5"
         />Usuń</a
       >
+      <a @click="destroy()" href="#delete" class="text-red-600"
+        ><RiDeleteBinLine
+          class="inline mr-0.5 h-4 w-4 sm:h-4 sm:w-4 md:h-4 md:w-4 lg:h-4 lg:w-4 xl:h-5 xl:w-5 2xl:h-5 2xl:w-5"
+        />Usuń</a
+      >
+      <RiDeleteBinLine
+        class="inline mr-0.5 h-4 w-4 sm:h-4 sm:w-4 md:h-4 md:w-4 lg:h-4 lg:w-4 xl:h-5 xl:w-5 2xl:h-5 2xl:w-5"
+      />
+      Usuń
     </BtnGroup>
   </template>
   <AppAlert v-else>Brak danych</AppAlert>

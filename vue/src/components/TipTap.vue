@@ -1,6 +1,7 @@
 <script setup>
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
+import { RiBold } from '@remixicon/vue'
 
 const props = defineProps({
   id: { type: String },
@@ -39,6 +40,9 @@ const editor = useEditor({
         class="p-1 rounded"
       >
         bold
+        <RiBold
+          class="inline mr-0.5 h-4 w-4 sm:h-4 sm:w-4 md:h-4 md:w-4 lg:h-4 lg:w-4 xl:h-5 xl:w-5 2xl:h-5 2xl:w-5"
+        />
       </button>
       <button
         type="button"
