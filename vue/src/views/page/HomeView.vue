@@ -19,19 +19,30 @@ products.value = collection.data
   <AppAlert v-if="error" type="danger">{{ error.message }}</AppAlert>
   <section
     v-else
-    class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4"
+    class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-4"
   >
     <div v-for="(product, index) in products" :key="product.id" class="mb-12">
       <div
-        class="border-y-[1px] hover:bg-gray-50 border-black p-4 h-full bg-contain bg-right bg-no-repeat hover:bg-cover hover:bg-center"
+        class="border-black border-y-[1px] hover:bg-gray-50 p-4 h-full bg-contain bg-right bg-no-repeat hover:bg-cover hover:bg-center"
         :style="{ backgroundImage: 'url(' + product.img + ')' }"
       >
-        <div>{{ index + 1 }}</div>
-        <div>{{ product.brand }}</div>
-        <div>{{ product.category }}</div>
-        <div>{{ product.name }}</div>
-        <div>{{ product.description }}</div>
-        <div>img: {{ product.img }}</div>
+        <div class="text-xs sm:text-xs md:text-sm lg:text-base xl:text-sm 2xl:text-sm">
+          {{ index + 1 }}
+        </div>
+        <h5 class="text-xs sm:text-xs md:text-sm lg:text-base xl:text-sm 2xl:text-sm">
+          {{ product.category }}
+        </h5>
+        <h4 class="text-xs sm:text-xs md:text-sm lg:text-base xl:text-base 2xl:text-lg">
+          {{ product.brand }}
+        </h4>
+        <h3 class="text-xs sm:text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-2xl">
+          <a href="#" title="Pokaż" class="hover:bg-black"
+            >{{ product.name }}
+            <span class="text-xs sm:text-xs md:text-sm lg:text-base xl:text-sm 2xl:text-sm"
+              >🡢</span
+            ></a
+          >
+        </h3>
         <!-- <template v-if="product.img">
           <img :src="product.img" />
         </template> -->

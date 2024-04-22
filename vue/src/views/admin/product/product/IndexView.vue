@@ -32,6 +32,7 @@ items.value = collection.data
         <TableHeaderRow>
           <TableHeader>LP</TableHeader>
           <TableHeader>ID</TableHeader>
+          <TableHeader>Zdjęcie</TableHeader>
           <TableHeader>Firma</TableHeader>
           <TableHeader>Kategoria</TableHeader>
           <TableHeader>Nazwa</TableHeader>
@@ -43,6 +44,12 @@ items.value = collection.data
         <tr v-for="(item, index) in items" :key="item.id">
           <TableData>{{ index + 1 }}</TableData>
           <TableData>{{ item.id }}</TableData>
+          <TableData>
+            <template v-if="item.img">
+              <img :src="item.img" width="40" />
+            </template>
+            <template v-else>&mdash;</template>
+          </TableData>
           <TableData>{{ item.brand }}</TableData>
           <TableData>{{ item.category }}</TableData>
           <TableData>
