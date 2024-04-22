@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 
-class SlugTest extends TestCase
+class AdminSlugTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -15,7 +15,7 @@ class SlugTest extends TestCase
     {
         $user = User::factory()->create();
         $this->actingAs($user);
-        $response = $this->postJson(route('api.slugs', ['text' => 'Jakiś tekst']));
+        $response = $this->postJson(route('admins.slugs', ['text' => 'Jakiś tekst']));
 
         $response->assertStatus(200)->assertJson(['slug' => 'jakis-tekst']);
     }

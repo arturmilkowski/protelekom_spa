@@ -8,7 +8,7 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Admin\Product\{Brand, Category, Condition, Product, Type};
 
-class TypeTest extends TestCase
+class AdminTypeTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -32,16 +32,34 @@ class TypeTest extends TestCase
     {
         $response = $this
             ->actingAs($this->user)
-            ->getJson(route('types.index', $this->product));
+            ->getJson(route('admins.types.index', $this->product));
 
         $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'data' => [
+                '*' => [
+                    'id',
+                    'product_id',
+                    'product',
+                    'condition_id',
+                    'condition',
+                    'slug',
+                    'name',
+                    'price',
+                    'promo_price',
+                    'quantity',
+                    'hide',
+                    'description',
+                    'img'
+                ]
+            ]
+        ]);
     }
 
     public function testStore(): void
     {
         $this->withoutExceptionHandling();
-        // dd($this->product);
-        $response = $this->postJson(route('types.store', $this->product), $this->type1->toArray());
+        $response = $this->postJson(route('admins.types.store', $this->product), $this->type1->toArray());
 
         $response->assertStatus(201)->assertJson(['name' => $this->type1->name]);
         $response->assertJsonIsObject();
@@ -51,7 +69,7 @@ class TypeTest extends TestCase
 
     public function testStoreWithValidationError(): void
     {
-        $response = $this->postJson(route('types.store', $this->product), $this->type2->toArray());
+        $response = $this->postJson(route('admins.types.store', $this->product), $this->type2->toArray());
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['name' => 'The name field is required.'], $responseKey = 'errors');
@@ -61,25 +79,29 @@ class TypeTest extends TestCase
     public function testShow(): void
     {
         $this->withoutExceptionHandling();
-        $response = $this->getJson(route('types.show', [$this->product, $this->product->types[0]]));
+        $response = $this->getJson(route('admins.types.show', [$this->product, $this->product->types[0]]));
 
-        // $response->dump();
         $response->assertStatus(200)->assertJson(['data' => ['name' => $this->product->types[0]['name']]]);
+        $response->assertJsonStructure([
+            'data' => [
+                'id',
+                'slug',
+                'name',
+            ]
+        ]);
     }
 
     public function testUpdate(): void
     {
-        // dd($this->product->types[0]);
-        $response = $this->putJson(route('types.update', [$this->product, $this->product->types[0]]), $this->type1->toArray());
+        $response = $this->putJson(route('admins.types.update', [$this->product, $this->product->types[0]]), $this->type1->toArray());
 
         $response->assertJsonIsObject();
-        // $response->assertStatus(200)->assertJson(['name' => $this->product1->name, 'brand_id' => $this->product1->brand_id]);
         $this->assertDatabaseHas('types', ['name' => $this->type1->name]);
     }
 
     public function testUpdateWithValidationError(): void
     {
-        $response = $this->putJson(route('types.update', [$this->product, $this->product->types[0]]), $this->type2->toArray());
+        $response = $this->putJson(route('admins.types.update', [$this->product, $this->product->types[0]]), $this->type2->toArray());
 
         $response
             ->assertStatus(422)
@@ -90,9 +112,8 @@ class TypeTest extends TestCase
     public function testDestroy(): void
     {
         $this->withoutExceptionHandling();
-        $response = $this->deleteJson(route('types.destroy', [$this->product, $this->product->types[0]]));
+        $response = $this->deleteJson(route('admins.types.destroy', [$this->product, $this->product->types[0]]));
 
-        // $response->assertStatus(204);
         $response->assertNoContent($status = 204);
         $this->assertDatabaseMissing('types', ['name' => $this->product->types[0]->name]);
     }

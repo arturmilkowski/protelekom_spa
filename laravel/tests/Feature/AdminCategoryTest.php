@@ -8,7 +8,7 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Admin\Product\Category;
 
-class CategoryTest extends TestCase
+class AdminCategoryTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -22,21 +22,29 @@ class CategoryTest extends TestCase
         $this->actingAs($this->user);
     }
 
-    // todo
     public function testCategoryIndex(): void
     {
         $response = $this->withoutExceptionHandling();
         $category = Category::factory(2)->create();
-        $response = $this->getJson(route('categories.index'));
+        $response = $this->getJson(route('admins.categories.index'));
 
         $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'data' => [
+                '*' => [
+                    'id',
+                    'slug',
+                    'name',
+                ]
+            ]
+        ]);
     }
 
     public function testCategoryStore(): void
     {
         $response = $this->withoutExceptionHandling();
         $data = ['name' => 'Sally', 'slug' => 'sally'];
-        $response = $this->postJson(route('categories.store', $data));
+        $response = $this->postJson(route('admins.categories.store', $data));
 
         $response->assertStatus(201);
         $this->assertDatabaseHas('categories', ['name' => 'Sally']);
@@ -45,7 +53,7 @@ class CategoryTest extends TestCase
     public function testCategoryStoreWithValidationError(): void
     {
         $category = Category::factory()->make(['name' => '']);
-        $response = $this->postJson(route('categories.store'), $category->toArray());
+        $response = $this->postJson(route('admins.categories.store'), $category->toArray());
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['name' => 'The name field is required.'], $responseKey = 'errors');
@@ -55,21 +63,26 @@ class CategoryTest extends TestCase
     public function testCategoryStoreWithDuplicateValidationError(): void
     {
         $category = Category::factory()->create();
-        $response = $this->postJson(route('categories.store'), $category->toArray());
-        $response = $this->postJson(route('categories.store'), $category->toArray());
+        $response = $this->postJson(route('admins.categories.store'), $category->toArray());
+        $response = $this->postJson(route('admins.categories.store'), $category->toArray());
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['name' => 'The name has already been taken.'], $responseKey = 'errors');
     }
 
-    // todo
     public function testCategoryShow(): void
     {
         $response = $this->withoutExceptionHandling();
         $category = Category::factory()->create();
-        $response = $this->getJson(route('categories.show', $category));
+        $response = $this->getJson(route('admins.categories.show', $category));
 
-
+        $response->assertJsonStructure([
+            'data' => [
+                'id',
+                'slug',
+                'name',
+            ]
+        ]);
         $response->assertStatus(200);
     }
 
@@ -78,7 +91,7 @@ class CategoryTest extends TestCase
         $response = $this->withoutExceptionHandling();
         $category = Category::factory()->create();
         $category1 = Category::factory()->make();
-        $response = $this->putJson(route('categories.update', $category), $category1->toArray());
+        $response = $this->putJson(route('admins.categories.update', $category), $category1->toArray());
 
         $response->assertStatus(200);
         $this->assertDatabaseHas('categories', ['name' => $category1->name]);
@@ -88,7 +101,7 @@ class CategoryTest extends TestCase
     {
         $category = Category::factory()->create();
         $category1 = Category::factory()->make(['name' => '']);
-        $response = $this->putJson(route('categories.update', $category), $category1->toArray());
+        $response = $this->putJson(route('admins.categories.update', $category), $category1->toArray());
 
         $response
             ->assertStatus(422)
@@ -99,7 +112,7 @@ class CategoryTest extends TestCase
     public function testCategoryDelete(): void
     {
         $category = Category::factory()->create();
-        $response = $this->withoutExceptionHandling()->deleteJson(route('categories.destroy', $category));
+        $response = $this->withoutExceptionHandling()->deleteJson(route('admins.categories.destroy', $category));
 
         $response->assertStatus(204);
         $this->assertDatabaseMissing('categories', ['name' => $category->name]);

@@ -8,7 +8,7 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Admin\Product\Condition;
 
-class ConditionTest extends TestCase
+class AdminConditionTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -22,21 +22,29 @@ class ConditionTest extends TestCase
         $this->actingAs($this->user);
     }
 
-    // todo
     public function testConditionIndex(): void
     {
         $response = $this->withoutExceptionHandling();
         $condition = Condition::factory(2)->create();
-        $response = $this->getJson(route('conditions.index'));
+        $response = $this->getJson(route('admins.conditions.index'));
 
         $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'data' => [
+                '*' => [
+                    'id',
+                    'slug',
+                    'name',
+                ]
+            ]
+        ]);
     }
 
     public function testConditionStore(): void
     {
         $response = $this->withoutExceptionHandling();
         $data = ['name' => 'Sally', 'slug' => 'sally'];
-        $response = $this->postJson(route('conditions.store', $data));
+        $response = $this->postJson(route('admins.conditions.store', $data));
 
         $response->assertStatus(201);
         $this->assertDatabaseHas('conditions', ['name' => 'Sally']);
@@ -45,7 +53,7 @@ class ConditionTest extends TestCase
     public function testConditionStoreWithValidationError(): void
     {
         $condition = Condition::factory()->make(['name' => '']);
-        $response = $this->postJson(route('conditions.store'), $condition->toArray());
+        $response = $this->postJson(route('admins.conditions.store'), $condition->toArray());
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['name' => 'The name field is required.'], $responseKey = 'errors');
@@ -55,21 +63,26 @@ class ConditionTest extends TestCase
     public function testConditionStoreWithDuplicateValidationError(): void
     {
         $condition = Condition::factory()->create();
-        $response = $this->postJson(route('conditions.store'), $condition->toArray());
-        $response = $this->postJson(route('conditions.store'), $condition->toArray());
+        $response = $this->postJson(route('admins.conditions.store'), $condition->toArray());
+        $response = $this->postJson(route('admins.conditions.store'), $condition->toArray());
 
         $response->assertStatus(422)
             ->assertJsonValidationErrors(['name' => 'The name has already been taken.'], $responseKey = 'errors');
     }
 
-    // todo
     public function testConditionShow(): void
     {
         $response = $this->withoutExceptionHandling();
         $condition = Condition::factory()->create();
-        $response = $this->getJson(route('conditions.show', $condition));
+        $response = $this->getJson(route('admins.conditions.show', $condition));
 
-
+        $response->assertJsonStructure([
+            'data' => [
+                'id',
+                'slug',
+                'name',
+            ]
+        ]);
         $response->assertStatus(200);
     }
 
@@ -78,7 +91,7 @@ class ConditionTest extends TestCase
         $response = $this->withoutExceptionHandling();
         $condition = Condition::factory()->create();
         $condition1 = Condition::factory()->make();
-        $response = $this->putJson(route('conditions.update', $condition), $condition1->toArray());
+        $response = $this->putJson(route('admins.conditions.update', $condition), $condition1->toArray());
 
         $response->assertStatus(200);
         $this->assertDatabaseHas('conditions', ['name' => $condition1->name]);
@@ -88,7 +101,7 @@ class ConditionTest extends TestCase
     {
         $condition = Condition::factory()->create();
         $condition1 = Condition::factory()->make(['name' => '']);
-        $response = $this->putJson(route('conditions.update', $condition), $condition1->toArray());
+        $response = $this->putJson(route('admins.conditions.update', $condition), $condition1->toArray());
 
         $response
             ->assertStatus(422)
@@ -99,7 +112,7 @@ class ConditionTest extends TestCase
     public function testConditionDelete(): void
     {
         $condition = Condition::factory()->create();
-        $response = $this->withoutExceptionHandling()->deleteJson(route('conditions.destroy', $condition));
+        $response = $this->withoutExceptionHandling()->deleteJson(route('admins.conditions.destroy', $condition));
 
         $response->assertStatus(204);
         $this->assertDatabaseMissing('categories', ['name' => $condition->name]);

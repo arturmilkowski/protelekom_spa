@@ -31,8 +31,25 @@ class PageTest extends TestCase
         $this->withoutExceptionHandling();
         $response = $this->getJson(route('pages.index'));
 
-        // $response->dd();
         $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'data' => [
+                '*' => [
+                    'id',
+                    'brand_id',
+                    'brand',
+                    'category_id',
+                    'category',
+                    'slug',
+                    'name',
+                    'description',
+                    'img',
+                    'site_description',
+                    'site_keyword',
+                    'hide'
+                ]
+            ]
+        ]);
     }
 
     public function testAbout(): void
@@ -43,7 +60,6 @@ class PageTest extends TestCase
             ->actingAs($this->user)
             ->getJson(route('pages.about'));
 
-        // $response->dd();
         $response->assertStatus(200);
     }
 }
